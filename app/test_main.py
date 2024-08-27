@@ -27,29 +27,30 @@ def list_template() -> list:
     ]
 
 
-def test_all_bad_product(list_template):
+def test_all_bad_product(list_template: list) -> None:
     today = datetime.date(2022, 2, 25)
-    with mock.patch('datetime.date') as mocked_date:
+    with mock.patch("datetime.date") as mocked_date:
         mocked_date.today.return_value = today
-        assert outdated_products(list_template) == ["salmon", "chicken", "duck"]
+        assert outdated_products(list_template) == [
+            "salmon", "chicken", "duck"]
 
 
-def test_one_good_product(list_template):
+def test_one_good_product(list_template: list) -> None:
     today = datetime.date(2022, 2, 2)
-    with mock.patch('datetime.date') as mocked_date:
+    with mock.patch("datetime.date") as mocked_date:
         mocked_date.today.return_value = today
         assert outdated_products(list_template) == ["duck"]
 
 
-def test_all_good_product(list_template):
+def test_all_good_product(list_template: list) -> None:
     today = datetime.date(2022, 1, 1)
-    with mock.patch('datetime.date') as mocked_date:
+    with mock.patch("datetime.date") as mocked_date:
         mocked_date.today.return_value = today
         assert outdated_products(list_template) == []
 
 
-def test_product_with_outdated_today(list_template):
+def test_product_with_outdated_today(list_template: list) -> None:
     today = datetime.date(2022, 2, 5)
-    with mock.patch('datetime.date') as mocked_date:
+    with mock.patch("datetime.date") as mocked_date:
         mocked_date.today.return_value = today
         assert outdated_products(list_template) == ["duck"]
